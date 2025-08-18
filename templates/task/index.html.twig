@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista de Tarefas{% endblock %}
+
+{% block body %}
+<h1>Lista de Tarefas</h1>
+
+<a href="{{ path('app_task_new') }}">➕ Nova Tarefa</a>
+
+<table border="1" cellpadding="5">
+    <tr>
+        <th>Título</th>
+        <th>Status</th>
+        <th>Ações</th>
+    </tr>
+    {% for task in tasks %}
+        <tr>
+            <td>{{ task.title }}</td>
+            <td>{{ task.status ? '✅ Concluída' : '⌛ Pendente' }}</td>
+            <td>
+                <a href="{{ path('app_task_edit', {id: task.id}) }}">✏️ Editar</a>
+                <form method="post" action="{{ path('app_task_delete', {id: task.id}) }}" style="display:inline;" onsubmit="return confirm('Tem certeza?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ task.id) }}">
+                    <button type="submit">🗑️ Excluir</button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="4">Nenhuma tarefa encontrada.</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

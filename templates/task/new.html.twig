@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+
+<title>Nova Tarefa</title>
+
+{% block body %}
+    <h1>Criar nova tarefa</h1>
+
+    {{ include('task/_form.html.twig', {'button_label': 'Salvar'})}}
+
+    <a href="{{ path('app_task_index') }}">voltar a lista</a>
+{% endblock %}
