@@ -1,21 +1,17 @@
-<!DOCTYPE html>
 {% extends 'base.html.twig' %}
 
-<title>Editar tarefa</title>
 {% block title %}Editar Tarefa{% endblock %}
 
 {% block body %}
-    <h1>Editar Tarefa</h1>
 <h1>Editar Tarefa</h1>
 
-    {{ include('task/_form.html.twig', {'button_label': 'Atualizar'}) }}
 {{ form_start(form) }}
     {{ form_widget(form) }}
     <button type="submit">Atualizar</button>
 {{ form_end(form) }}
 
-    <a href="{{ path('app_task_index') }}">Voltar a lista</a>
+<div class="task-links">
+    <a href="{{ path('app_task_index') }}" class="btn">Voltar</a>
+</div>
 
-    {{ include('task/_delete_form.html.twig') }}
-<a href="{{ path('app_task_index') }}" class="btn-back">← Voltar</a>
 {% endblock %}

@@ -1,56 +1,17 @@
-<!DOCTYPE html>
 {% extends 'base.html.twig' %}
 
-<title>Tarefa</title>
 {% block title %}Detalhes da Tarefa{% endblock %}
 
 {% block body %}
-    <h1>Tarefa</h1>
 <h1>Detalhes da Tarefa</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ task.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ task.title }}</td>
-            </tr>
-            <tr>
-                <th>Deadline</th>
-                <td>{{ task.deadline }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ task.status }}</td>
-            </tr>
-        </tbody>
-    </table>
-<ul>
-    <li><strong>Título:</strong> {{ task.title }}</li>
-    <li><strong>Deadline:</strong> {{ task.deadline|date('d/m/Y') }}</li>
-    <li><strong>Status:</strong> {{ task.status ? 'Concluída' : 'Pendente' }}</li>
-    <li><strong>Descrição:</strong> {{ task.description }}</li>
-</ul>
+<p><strong>Titulo:</strong> {{ task.title }}</p>
+<p><strong>Descrição:</strong> {{ task.description }}</p>
+<p><strong>Deadline:</strong> {{ task.deadline ? task.deadline|date('d/m/Y') : '—' }}</p>
 
-    <a href="{{ path('app_task_index') }}">Voltar a lista</a>
-<div class="task-actions">
-    <form action="{{ path('app_task_edit', {'id': task.id}) }}" method="get" style="display:inline;">
-        <button type="submit" class="btn btn-edit">Editar</button>
-    </form>
-
-    <a href="{{ path('app_task_edit', {'id': task.id}) }}">Editar</a>
-
-    {{ include('task/_delete_form.html.twig') }}
-    <form method="post" action="{{ path('app_task_delete', {'id': task.id}) }}" 
-         onsubmit="return confirm('Deseja realmente excluir esta tarefa?');" 
-         class="delete-form">
-         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ task.id) }}">
-         <button type="submit">Excluir</button>
-    </form>
-
-    <a href="{{ path('app_task_index') }}" class="btn-back">← Voltar</a>
+<div class="task-links">
+    <a href="{{ path('app_task_index') }}" class="btn">Voltar</a>
+    <a href="{{ path('app_task_edit', {'id': task.id}) }}" class="btn btn-edit">Editar</a>
 </div>
+
 {% endblock %}
