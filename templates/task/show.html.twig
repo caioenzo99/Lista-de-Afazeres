@@ -5,9 +5,9 @@
 {% block body %}
 <h1>Detalhes da Tarefa</h1>
 
-<p><strong>Titulo:</strong> {{ task.title }}</p>
+<p><strong>Título:</strong> {{ task.title }}</p>
 <p><strong>Descrição:</strong> {{ task.description }}</p>
-<p><strong>Deadline:</strong> {{ task.deadline ? task.deadline|date('d/m/Y') : '—' }}</p>
+<p><strong>Data da Tarefa:</strong> {{ task.deadline ? task.deadline|date('d/m/Y') : '—' }}</p>
 
 <div class="task-links">
     <a href="{{ path('app_task_index') }}" class="btn">Voltar</a>
