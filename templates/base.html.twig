@@ -1,11 +1,12 @@
-{# filepath: templates/base.html.twig #}
+{# templates/base.html.twig #}
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}My App{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     </head>
     <body>
         {% block body %}{% endblock %}
-     </body>
+    </body>
 </html>
