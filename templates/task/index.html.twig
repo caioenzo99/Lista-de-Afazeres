@@ -18,7 +18,7 @@
             <td>{{ task.title }}</td>
             <td>{{ task.status ? '✅ Concluída' : '⌛ Pendente' }}</td>
             <td>
-                <a href="{{ path('app_task_edit', {id: task.id}) }}">✏️ Editar</a>
+                <a href="{{ path('app_task_edit', {id: task.id}) }}">Editar</a>
                 <form method="post" action="{{ path('app_task_delete', {id: task.id}) }}" style="display:inline;" onsubmit="return confirm('Tem certeza?');">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ task.id) }}">
                     <button type="submit">🗑️ Excluir</button>
