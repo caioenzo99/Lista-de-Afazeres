@@ -58,23 +58,14 @@ class TaskController extends AbstractController
         ]);
     }
 
-    #[Route('/task/{id}', name: 'app_task_delete', methods: ['POST'])]
-public function delete(Request $request, Task $task, EntityManagerInterface $entityManager): Response
-{
-    if ($this->isCsrfTokenValid('delete'.$task->getId(), $request->request->get('_token'))) {
-        $entityManager->remove($task);
-        $entityManager->flush();
-    }
-
-    return $this->redirectToRoute('app_task_index');
-}
-
-
-    #[Route('/show/{id}', name: 'app_task_show', methods: ['GET'])]
-    public function show(Task $task): Response
+    #[Route('/delete/{id}', name: 'app_task_delete', methods: ['POST'])]
+    public function delete(Request $request, Task $task, EntityManagerInterface $em): Response
     {
-        return $this->render('task/show.html.twig', [
-            'task' => $task,
-        ]);
-    }    
+        if ($this->isCsrfTokenValid('delete'.$task->getId(), $request->request->get('_token'))) {
+            $em->remove($task);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('app_task_index');
+    }
 }

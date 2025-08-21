@@ -1,15 +1,11 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
 
-{% block title %}Nova Tarefa{% endblock %}
+<title>Nova Tarefa</title>
 
 {% block body %}
-<h1>Nova Tarefa</h1>
+    <h1>Criar nova tarefa</h1>
 
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button type="submit">Salvar</button>
-{{ form_end(form) }}
+    {{ include('task/_form.html.twig', {'button_label': 'Salvar'})}}
 
-<a href="{{ path('app_task_index') }}" class="btn btn-back">← Voltar</a>
-
+    <a href="{{ path('app_task_index') }}">voltar a lista</a>
 {% endblock %}

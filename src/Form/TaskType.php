@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Task;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,7 +16,7 @@ class TaskType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Título da tarefa'
             ])
-            ->add('status', CheckboxType::class, [
+            ->add('status', TextType::class, [
                 'label'    => 'Concluída?',
                 'required' => false
             ])->add('deadline', TextType::class, [
@@ -27,12 +26,6 @@ class TaskType extends AbstractType
                     'placeholder' => 'DD-MM-YYYY',
                     'pattern' => '\d{2}-\d{2}-\d{4}',
                     'title' => 'Formato: DD-MM-YYYY'
-                ]
-            ])->add('description', TextType::class, [
-                'label' => 'Descrição',
-                'required' => false,
-                'attr' => [
-                    'placeholder' => 'Descrição da tarefa'
                 ]
             ]);
     }

@@ -7,43 +7,28 @@
 
 <a href="{{ path('app_task_new') }}">➕ Nova Tarefa</a>
 
-<table>
-    <thead>
+<table border="1" cellpadding="5">
+    <tr>
+        <th>Título</th>
+        <th>Status</th>
+        <th>Ações</th>
+    </tr>
+    {% for task in tasks %}
         <tr>
-            <th>Título</th>
-            <th>Data da Tarefa</th>
-            <th>Status</th>
-            <th>Descrição</th>
-            <th>Ações</th>
+            <td>{{ task.title }}</td>
+            <td>{{ task.status ? '✅ Concluída' : '⌛ Pendente' }}</td>
+            <td>
+                <a href="{{ path('app_task_edit', {id: task.id}) }}">✏️ Editar</a>
+                <form method="post" action="{{ path('app_task_delete', {id: task.id}) }}" style="display:inline;" onsubmit="return confirm('Tem certeza?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ task.id) }}">
+                    <button type="submit">🗑️ Excluir</button>
+                </form>
+            </td>
         </tr>
-    </thead>
-    <tbody>
-        {% for task in tasks %}
-            <tr>
-                <td>{{ task.title }}</td>
-                <td>
-                    {{ task.deadline|date('d/m/Y') }}
-                    {% if task.deadline < "now"|date %}
-                    {% endif %}
-                </td>
-                <td>{{ task.status ? 'Concluída' : 'Pendente' }}</td>
-                <td>{{ task.description }}</td>
-                <td>
-                    <a href="{{ path('app_task_show', {'id': task.id}) }}">Ver</a>
-                    <a href="{{ path('app_task_edit', {'id': task.id}) }}">Editar</a>
-                    <form method="post" action="{{ path('app_task_delete', {'id': task.id}) }}" 
-                        onsubmit="return confirm('Deseja realmente excluir esta tarefa?');" 
-                        class="delete-form">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ task.id) }}">
-                        <button type="submit">Excluir</button>
-                    </form>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">Nenhuma tarefa encontrada</td>
-            </tr>
-        {% endfor %}
-    </tbody>
+    {% else %}
+        <tr>
+            <td colspan="4">Nenhuma tarefa encontrada.</td>
+        </tr>
+    {% endfor %}
 </table>
 {% endblock %}
